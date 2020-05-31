@@ -7,6 +7,5 @@ def index(request):
 	return render(request, 'rango/index.html', context = context_dict)
 
 def about(request):
-	response = "<html><body><h1>Welcome to about us page</h1>"
-	response += "<a href = 'http://127.0.0.1:8000/rango' >Main Page</a></body></html>"
-	return HttpResponse(response)
+	context_dict = {'msg': 'hello dear friends'}
+	return render(request, 'rango/about.html', context = context_dict)

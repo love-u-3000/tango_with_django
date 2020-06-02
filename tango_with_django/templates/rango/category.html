@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static "css/style.css"%}">
+	<title>{{category.name}}</title>
+</head>
+<body>
+	<div>
+	{% if category %}
+		<h1>{{category.name}}</h1>
+		{% if pages %}
+			<ul>
+			{% for page in pages %}
+				<li><a href="{{page.url}}">{{page.title}}</a></li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<h3>{{category.name}} has no pages</h3>
+		{% endif %}
+	{% else %}
+		<h1>Invalid Category</h1>
+	{% endif %}
+	</div>
+</body>
+</html>

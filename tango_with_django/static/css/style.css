@@ -8,3 +8,7 @@ div {
 	margin-right: auto;
 	text-align: center;
 }
+
+a {
+	text-decoration: none;
+}

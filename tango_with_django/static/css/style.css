@@ -1,6 +1,11 @@
 
 * {
 	text-align: center;
+	font-family: Helvetica ,sans-serif;
+}
+
+body {
+	background-color: teal;
 }
 
 img {
@@ -16,8 +21,18 @@ div {
 
 a {
 	text-decoration: none;
+	color: darkblue;
+}
+
+a:hover {
+	color: blue;
 }
 
 ul {
 	list-style-type: disc;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
 }

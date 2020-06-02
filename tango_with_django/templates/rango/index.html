@@ -14,21 +14,46 @@
 		hey there partner!<br>
 	</div>
 
-	<div>
+	<div style="float: left; width: 50%">
 	{% if categories %}
-		<ul>
-		{% for cat in categories %}
-			<li><a href="/rango/category/{{ cat.slug }}">{{ cat.name }}</a></li>
-		{% endfor %}
-		</ul>
+		<h2>Most Liked Categories</h2>
+		<div>
+			<table>
+				<tr>
+					<th>Category</th><th>Likes</th>
+				</tr>
+				{% for cat in categories%}
+					<tr>
+						<td><a href="/rango/category/{{cat.slug}}">{{cat.name}}</a></td><td>{{cat.likes}}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
 	{% else %}
-		<strong>There are no categories present</strong>
+		<h2>There are no categories present</h2>
 	{% endif %}
 	</div>
-
+	<div style="float: left; width: 50%">
+	{% if pages %}
+		<h2>Most Viewed Pages</h2>
+		<table>
+			<tr>
+				<th>Page Title</th><th>Total Views</th>
+			</tr>
+			{% for page in pages %}
+				<tr>
+					<td><a href="{{page.url}}">{{page.title}}</a></td>
+					<td>{{page.views}}</td>
+				</tr>
+		{% endfor %}
+		</table>
+	{% else %}
+		<h2>There are no pages</h2>
+	{% endif %}
+	</div>
 	<div>
 		<img src="{% static "images/avengers.jpg" %}"
-alt="Picture of Rango" />
+alt="Picture of Rango" / style="margin-top: 20px;">
 	</div>
 	<div>
 		<a href="/rango/about">About</a><br>

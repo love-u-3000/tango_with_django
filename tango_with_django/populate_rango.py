@@ -1,6 +1,8 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django.settings')
 
+import random
+
 import django
 django.setup()
 from rango.models import Category, Page
@@ -42,11 +44,12 @@ def populate():
 			print("- {0} - {1}".format(str(c), str(p)))
 
 def add_page(cat, page_title, page_url):
-	page = Page(category = cat, title = page_title, url = page_url)
+	page = Page.objects.get_or_create(category = cat, title = page_title, url = page_url)[0]
+	page.views = random.randint(0,100)
 	page.save()
 
 def add_category(cat_name):
-	cat = Category(name = cat_name)
+	cat = Category.objects.get_or_create(name = cat_name)[0]
 	if cat_name == "Python":
 		cat.views = 128
 		cat.likes = 64

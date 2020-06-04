@@ -1,11 +1,10 @@
+{% extends 'rango/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="{% static "css/style.css"%}">
-	<title>{{category.name}}</title>
-</head>
-<body>
+
+{% block title_block %}
+	{{category.name}}
+{% endblock %}
+{% block body_block %}
 	<div>
 	{% if category %}
 		<h1>{{category.name}}</h1>
@@ -18,18 +17,11 @@
 		{% else %}
 			<h3>{{category.name}} has no pages</h3>
 		{% endif %}
+		<a href="{% url 'rango:add_page' category.slug %}">
+			<button>Add a Page</button>
+		</a>
 	{% else %}
 		<h1>Invalid Category</h1>
 	{% endif %}
 	</div>
-	<div>
-		<a href="/rango/category/{{category.slug}}/add_page">
-			<button>Add a Page</button>
-		</a>
-	</div>
-	<footer>
-		<a href="/rango">Back to the Home Page</a>
-	</footer>
-
-</body>
-</html>
+{% endblock %}

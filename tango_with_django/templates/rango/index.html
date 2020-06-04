@@ -32,6 +32,7 @@
 	{% else %}
 		<h2>There are no categories present</h2>
 	{% endif %}
+		<button><a href="/rango/add_category">Add a Category</a></button>
 	</div>
 	<div style="float: left; width: 50%">
 	{% if pages %}
@@ -50,10 +51,11 @@
 	{% else %}
 		<h2>There are no pages</h2>
 	{% endif %}
+	<br><br>
 	</div>
 	<div>
 		<img src="{% static "images/avengers.jpg" %}"
-alt="Picture of Rango" / style="margin-top: 20px;">
+alt="Picture of Rango" style="margin-top: 10px;" />
 	</div>
 	<div>
 		<a href="/rango/about">About</a><br>

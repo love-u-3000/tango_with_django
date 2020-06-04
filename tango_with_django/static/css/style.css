@@ -36,3 +36,19 @@ table {
 	margin-left: auto;
 	margin-right: auto;
 }
+
+#foot {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background-color: grey;
+  color: white;
+  text-align: center;
+}
+
+#foot > div {
+	float: left;
+	width: 50%;
+}

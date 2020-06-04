@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-
+{% extends 'rango/base.html' %}
 {% load static %}
 
-<html>
-<head>
-	<title>Rango</title>
-	<link rel="stylesheet" type="text/css" href="{% static "css/style.css"%}">
-	<script type="text/javascript" src="{% static "javascript/script.js"%}"></script>
-</head>
-<body>
-	<h1>Rango says...</h1>
-	<div>
-		hey there partner!<br>
-	</div>
+{% block title_block %}
+	Home Page
+{% endblock %}
+
+{% block body_block%}
+	<h1>Rango says Hey there Partner</h1>
 
 	<div style="float: left; width: 50%">
 	{% if categories %}
@@ -24,7 +18,7 @@
 				</tr>
 				{% for cat in categories%}
 					<tr>
-						<td><a href="/rango/category/{{cat.slug}}">{{cat.name}}</a></td><td>{{cat.likes}}</td>
+						<td><a href="{% url 'rango:category' cat.slug %}">{{cat.name}}</a></td><td>{{cat.likes}}</td>
 					</tr>
 				{% endfor %}
 			</table>
@@ -32,7 +26,7 @@
 	{% else %}
 		<h2>There are no categories present</h2>
 	{% endif %}
-		<button><a href="/rango/add_category">Add a Category</a></button>
+		<button><a href="{% url 'rango:add_category' %}">Add a Category</a></button>
 	</div>
 	<div style="float: left; width: 50%">
 	{% if pages %}
@@ -57,8 +51,4 @@
 		<img src="{% static "images/avengers.jpg" %}"
 alt="Picture of Rango" style="margin-top: 10px;" />
 	</div>
-	<div>
-		<a href="/rango/about">About</a><br>
-	</div>
-</body>
-</html>
+{% endblock %}

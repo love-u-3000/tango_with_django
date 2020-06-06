@@ -2,8 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Category, Page, UserProfile
 from .forms import CategoryForm, PageForm, UserForm, UserProfileForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 def index(request):
 	cat = Category.objects.order_by('-likes')[:5]
@@ -29,6 +30,7 @@ def show_category(request, category_name_url):
 		context_dict['category'] = None
 	return render(request, 'rango/category.html', context_dict)
 
+@login_required
 def add_category(request):
 	if request.method == 'POST':
 		form = CategoryForm(request.POST)
@@ -39,6 +41,7 @@ def add_category(request):
 		form = CategoryForm()
 	return render(request, 'rango/add_category.html', {'form': form})
 
+@login_required
 def add_page(request, category_name_url):
 	cat = get_object_or_404(Category, slug = category_name_url)
 	if request.method == 'POST':
@@ -74,6 +77,7 @@ def register(request):
 
 			profile.save()
 			registered = True	
+			return HttpResponseRedirect(reverse('rango:login'))
 
 	else:
 		user_form = UserForm()
@@ -100,3 +104,7 @@ def user_login(request, prompt = False):
 			return user_login(request, True)
 	else:
 		return render(request, 'rango/login.html', {'prompt': prompt})
+
+def user_logout(request):
+	logout(request)
+	return HttpResponseRedirect(reverse('rango:index'))

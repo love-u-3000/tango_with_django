@@ -6,7 +6,13 @@
 {% endblock %}
 
 {% block body_block%}
-	<h1>Rango says Hey there Partner</h1>
+	<h1>Rango says Hey there 
+		{% if user.is_authenticated %}
+			{{user.username}}
+		{% else %}
+			Partner
+		{% endif %}
+	</h1>
 
 	<div style="float: left; width: 50%">
 	{% if categories %}

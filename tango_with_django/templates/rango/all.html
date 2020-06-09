@@ -1,0 +1,25 @@
+{% extends 'rango/base.html' %}
+{% load static %}
+
+{% block title_block %}
+	Categories
+{% endblock %}
+
+{% block body_block %}
+	{% if categories %}
+		<h2 class="text-center">Categories</h2>
+		<ul class="text-center" style="list-style-type: none; margin-top: 20px">
+			{% for cat in categories %}
+				<li>
+					<a href="{% url 'rango:category' cat.slug %}">{{cat.name}}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<h2 class="text-center">No categories are added yet</h2>
+	{% endif %}
+	<div class="text-center">
+		<a class="btn btn-outline-primary" href="{% url 'rango:add_category' %}">Add Category</a>
+	</div>
+{% endblock %}

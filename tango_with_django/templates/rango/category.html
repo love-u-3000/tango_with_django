@@ -7,9 +7,9 @@
 {% block body_block %}
 	<div>
 	{% if category %}
-		<h1>{{category.name}}</h1>
+		<h1 class="text-center" >{{category.name}}</h1>
 		{% if pages %}
-			<ul>
+			<ul style="display: table; margin: 0 auto;">
 			{% for page in pages %}
 				<li><a href="{{page.url}}">{{page.title}}</a></li>
 			{% endfor %}
@@ -17,10 +17,12 @@
 		{% else %}
 			<h3>{{category.name}} has no pages</h3>
 		{% endif %}
-		<a href="{% url 'rango:add_page' category.slug %}">
-			<button>Add a Page</button>
-		</a>
-	{% else %}
+		<br>
+		<div class="text-center">
+			<a class="btn btn-outline-danger" href="{% url 'rango:add_page' category.slug %}">Add Page
+			</a>
+		</div>
+		{% else %}
 		<h1>Invalid Category</h1>
 	{% endif %}
 	</div>

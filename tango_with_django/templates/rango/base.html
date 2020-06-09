@@ -10,38 +10,63 @@
 			Tango With Django
 		{% endblock %}
 	</title>
-	<style type="text/css" script="{% static "javascript/script.js"%}"></style>
-	<link rel="stylesheet" type="text/css" href="{% static "css/style.css"%}">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<!--
+	<link rel="stylesheet" type="text/css" href="{% static "css/style.css"%}"> -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
-	<div>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+	  <!-- Brand -->
+	  <a class="navbar-brand" href="{% url 'rango:index' %}">Rango</a>
+
+	  <!-- Toggler/collapsibe Button -->
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <!-- Navbar links -->
+	  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+	    <ul class="navbar-nav">
+	      <li class="nav-item">
+	        <a class="nav-link" href="{% url 'rango:about' %}">About</a>
+	      </li>
+	      	{% if user.is_authenticated %}
+		      	<li class="nav-item">
+		        	<a class="nav-link" href="{% url 'rango:logout' %}">Logout <strong>{{user.username}}</strong></a>
+		        </li>
+	        {% else %}
+		      	<li class="nav-item">
+		        	<a class="nav-link" href="{% url 'rango:login' %}">Login</a>
+		        </li>
+		        
+		      	<li class="nav-item">
+		        	<a class="nav-link" href="{% url 'rango:register' %}">Register</a>
+		        </li>
+	        {% endif %}
+	    </ul>
+	  </div>
+	</nav> 
+
+
+	<div class="container">
 		{% block body_block %}
 		{% endblock %}
 	</div>
-	<div>
-		{% block sidebar_block %}
-			{% get_category_list category %}
-		{% endblock %}
-	</div>
-	<div id="foot">
-		<div>
-			<a href="{% url 'rango:about' %}">About</a>
-		</div>
-		<div>
-			<a href="{% url 'rango:index' %}">Home</a>
-		</div>
-		<div>
-			<a href="{% url 'rango:register' %}">Register Here</a>
-		</div>
-		<div>
-			{% if user.is_authenticated %}
-				<a href="{% url 'rango:logout' %}">Logout {{user.username}}</a>
-			{% else %}
-				<a href="{% url 'rango:login' %}">Login</a>
-			{% endif %}
-		</div>
-	</div>
+
+	 
+
+
+
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
 </html>

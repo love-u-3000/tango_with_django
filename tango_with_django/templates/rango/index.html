@@ -6,55 +6,52 @@
 {% endblock %}
 
 {% block body_block%}
-	<h1>Rango says Hey there 
-		{% if user.is_authenticated %}
-			{{user.username}}
-		{% else %}
-			Partner
-		{% endif %}
-	</h1>
+	<div class="jumbotron text-center">
+		<h1>Rango says Hey there 
+			{% if user.is_authenticated %}
+				<strong>{{user.username}}</strong>
+			{% else %}
+				Partner
+			{% endif %}
+		</h1>
+	</div>
 
-	<div style="float: left; width: 50%">
-	{% if categories %}
-		<h2>Most Liked Categories</h2>
-		<div>
-			<table>
-				<tr>
-					<th>Category</th><th>Likes</th>
-				</tr>
-				{% for cat in categories%}
-					<tr>
-						<td><a href="{% url 'rango:category' cat.slug %}">{{cat.name}}</a></td><td>{{cat.likes}}</td>
-					</tr>
-				{% endfor %}
-			</table>
+	<div class="row">
+		<div class="col-sm-6">
+			{% if categories %}
+				<h3 class="text-center">Top Categories</h3>
+				<ul>
+					{% for cat in categories %}
+						<li>
+							<a href="{% url 'rango:category' cat.slug %}">{{cat.name}}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<h3 class="text-center">No Categories Present</h3>
+			{% endif %}
+			<div class="text-center">
+				<a class="btn btn-outline-primary text-center" href="{% url 'rango:add_category' %}">Add Category</a>
+			</div>
 		</div>
-	{% else %}
-		<h2>There are no categories present</h2>
-	{% endif %}
-		<button><a href="{% url 'rango:add_category' %}">Add a Category</a></button>
+		<div class="col-sm-6">
+			{% if pages %}
+				<h3 class="text-center">Top Pages</h3>
+				<ul>
+					{% for page in pages %}
+						<li>
+							<a href="{{page.url}}">{{page.title}}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<h3 class="text-center">No Pages Present</h3>
+			{% endif %}	
+		</div>
 	</div>
-	<div style="float: left; width: 50%">
-	{% if pages %}
-		<h2>Most Viewed Pages</h2>
-		<table>
-			<tr>
-				<th>Page Title</th><th>Total Views</th>
-			</tr>
-			{% for page in pages %}
-				<tr>
-					<td><a href="{{page.url}}">{{page.title}}</a></td>
-					<td>{{page.views}}</td>
-				</tr>
-		{% endfor %}
-		</table>
-	{% else %}
-		<h2>There are no pages</h2>
-	{% endif %}
-	<br><br>
-	</div>
+	<br>
 	<div>
-		<img src="{% static "images/avengers.jpg" %}"
-alt="Picture of Rango" style="margin-top: 10px;" />
+		<img class="img-fluid rounded-circle" src="{% static "images/avengers.jpg" %}"
+alt="Picture of Avengers"/>
 	</div>
 {% endblock %}

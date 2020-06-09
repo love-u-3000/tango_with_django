@@ -108,3 +108,8 @@ def user_login(request, prompt = False):
 def user_logout(request):
 	logout(request)
 	return HttpResponseRedirect(reverse('rango:index'))
+
+def all(request):
+	cats = Category.objects.all()
+	context_dict = {'categories': cats}
+	return render(request, 'rango/all.html', context_dict)

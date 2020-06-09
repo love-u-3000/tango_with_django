@@ -7,13 +7,15 @@
 
 {% block body_block %}
 	{% if prompt %}
-		<h1>Please enter correct credentials</h1><br>
+		<h1 class="text-center">Please enter correct credentials</h1><br>
 	{% endif %}
-	<h1>Login</h1>
-	<form method="POST" action="{% url 'rango:login' %}">
-		{% csrf_token %}
-		<input type="text" name="username" placeholder="Username"><br>
-		<input type="password" name="password" placeholder="Password"><br>
-		<input type="submit" name="submit" value="Login">
-	</form>
+	<h1 class="text-center">Login</h1>
+	<div class="text-center">
+		<form method="POST" action="{% url 'rango:login' %}">
+			{% csrf_token %}
+			<input type="text" name="username" placeholder="Username"><br><br>
+			<input type="password" name="password" placeholder="Password"><br><br>
+			<input class="btn btn-outline-primary" type="submit" name="submit" value="Login">
+		</form>
+	</div>
 {% endblock %}

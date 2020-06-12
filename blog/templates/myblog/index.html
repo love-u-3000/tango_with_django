@@ -1,0 +1,36 @@
+{% extends 'myblog/base.html' %}
+{% load static %}
+
+{% block title_block %}
+	Pavitra's Blog
+{% endblock %}
+
+{% block body_block %}
+	<h1 class="jumbotron text-center">Welcome to Blogs!!</h1>
+	{% if not user.is_authenticated %}
+		<div class="row">
+			<div class="col-sm-6 text-center">
+				<h3>Have an account Login Here</h3>
+				<br>
+				<a class="btn btn-primary" href="{% url 'myblog:login' %}">Login</a>
+			</div>
+			<div class="col-sm-6 text-center">
+				<h3>New User Register Here</h3>
+				<br>
+				<a class="btn btn-primary" href="#">Register</a>
+			</div>
+		</div>
+	{% else %}
+		{% if posts %}
+			{% for post in posts %}
+				<div>
+					<h3 style="text-decoration: underline;">{{post.title}}</h3>
+					<p>{{post.text}}</p>
+				</div>
+				<hr>
+			{% endfor %}
+		{% else %}
+			<h3 class="text-center">You have not created any blogs yet</h3>
+		{% endif %}
+	{% endif %}
+{% endblock %}

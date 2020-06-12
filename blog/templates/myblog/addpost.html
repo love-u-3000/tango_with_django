@@ -1,0 +1,18 @@
+{% extends 'myblog/base.html' %}
+{% load static %}
+
+{% block title_block %}
+	Add a Post
+{% endblock %}
+
+{% block body_block %}
+	<div class="text-center">
+		<h2>New Post</h2>
+		<form method="POST" action="{% url 'myblog:addpost' %}">
+			{% csrf_token %}
+			{{post_form.as_p}}
+
+			<input class="btn btn-primary" type="submit" name="submit" value="Post">
+		</form>
+	</div>
+{% endblock %}

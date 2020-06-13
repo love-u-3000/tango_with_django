@@ -7,12 +7,15 @@
 
 {% block body_block %}
 	<div class="text-center">
-		<h2>New Post</h2>
+		{% if pk %}
+			<h2>Edit Post</h2>
+		{% else%}
+			<h2>New  Post</h2>
+		{% endif %}
 		<form method="POST" action="{% url 'myblog:addpost' %}">
 			{% csrf_token %}
 			{{post_form.as_p}}
-
-			<input class="btn btn-primary" type="submit" name="submit" value="Post">
+			<input class="btn btn-primary" type="submit" name="submit" value="Save Post">
 		</form>
 	</div>
 {% endblock %}

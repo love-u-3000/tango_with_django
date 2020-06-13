@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body_block %}
-	<h1 class="jumbotron text-center">Welcome to Blogs!!</h1>
+	<h1 class="jumbotron text-center" style="font-family: Lobster;">Welcome to Blogs!!</h1>
 	{% if not user.is_authenticated %}
 		<div class="row">
 			<div class="col-sm-6 text-center">
@@ -17,20 +17,28 @@
 			<div class="col-sm-6 text-center">
 				<h3>New User Register Here</h3>
 				<br>
-				<a class="btn btn-primary" href="#">Register</a>
+				<a class="btn btn-primary" href="{% url 'myblog:register' %}">Register</a>
 			</div>
 		</div>
 	{% else %}
 		{% if posts %}
 			{% for post in posts %}
 				<div>
-					<h3 style="text-decoration: underline;">{{post.title}}</h3>
-					<p>{{post.text}}</p>
+					<h3 style="font-family: Lobster; font-style: italic;">
+						<a href="{% url 'myblog:editpost' post.pk %}">{{post.title}}</a>
+					</h3>
+					<p style="font-size: 0.9em; color: grey;">
+						published: {{post.published_date}}
+					</p>
+					<p style="font-family: Lobster;">{{post.text}}</p>
 				</div>
 				<hr>
 			{% endfor %}
 		{% else %}
-			<h3 class="text-center">You have not created any blogs yet</h3>
+			<h3 class="text-center">You have not created any blogs yet</h3><br>
+			<div class="text-center">
+				<a class="btn btn-primary" href="{% url 'myblog:addpost' %}">Create a Post</a>
+			</div>
 		{% endif %}
 	{% endif %}
 {% endblock %}

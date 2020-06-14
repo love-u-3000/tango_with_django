@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block title_block %}
-	Add a Post
+	Edit Post {{post.title}}
 {% endblock %}
 
 {% block body_block %}
 	<div class="text-center">
-		<h2>New  Post</h2>
-		<form method="POST" action="{% url 'myblog:addpost' %}">
+		<h2>Edit Post</h2>
+		<form method="POST" action="{% url 'myblog:editpost' pk%}">
 			{% csrf_token %}
 			{{post_form.as_p}}
 			<input class="btn btn-primary" type="submit" name="submit" value="Save Post">

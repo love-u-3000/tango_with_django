@@ -34,11 +34,11 @@ def user_login(request):
 	if request.method == 'POST':
 		username = request.POST.get('username')
 		password = request.POST.get('password')
-		global posts
 		user = authenticate(username = username, password = password)
 		if user:
 			if user.is_active:
 				login(request, user)
+				global posts
 				posts = Post.objects.filter(author = user).order_by('-published_date')
 				return HttpResponseRedirect(reverse('myblog:index'))
 			else:
@@ -76,11 +76,20 @@ def addpost(request):
 def editpost(request, pk):
 	post = get_object_or_404(Post, pk = pk)
 	if request.method == 'POST':
-		post.delete()
-		return addpost(request)
-
+		post_form = PostForm(request.POST, instance = post)
+		if post_form.is_valid():
+			post = post_form.save(commit = False)
+			post.published_date = timezone.now();
+			post.author = request.user
+			post.save()
+			global posts
+			posts = Post.objects.filter(author = request.user).order_by('-published_date')
+			return HttpResponseRedirect(reverse('myblog:index'))
+		else:
+			context_dict = {'post_form': post_form}
+			return render(request, 'myblog/editpost.html', context_dict)
 	else:
-		post_form = PostForm(initial = {'title': post.title, 'text': post.text}, instance = post)
+		post_form = PostForm(instance = post)
 		context_dict = {'post_form': post_form, 'pk': pk}
-		return render(request, 'myblog/addpost.html', context_dict)
+		return render(request, 'myblog/editpost.html', context_dict)
 

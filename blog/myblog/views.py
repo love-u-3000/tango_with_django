@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -74,13 +74,13 @@ def addpost(request):
 		return render(request, 'myblog/addpost.html', context_dict)
 
 def editpost(request, pk):
-	post = Post.objects.get(pk = pk)
+	post = get_object_or_404(Post, pk = pk)
 	if request.method == 'POST':
 		post.delete()
 		return addpost(request)
 
 	else:
-		post_form = PostForm({'title': post.title, 'text': post.text})
+		post_form = PostForm(initial = {'title': post.title, 'text': post.text}, instance = post)
 		context_dict = {'post_form': post_form, 'pk': pk}
 		return render(request, 'myblog/addpost.html', context_dict)
 

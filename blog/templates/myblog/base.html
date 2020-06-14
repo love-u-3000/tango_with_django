@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,9 @@
 	</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static "styles/basestyle.css"%}">
 </head>
 <body>
 
@@ -58,14 +62,35 @@
 		</nav> 
 
 	{% endif %}
-	<div class="container">
+	<div id="page-container" class="container">
 
-		{% block body_block %}
+		<div id="content-wrap">
+			{% block body_block %}
 
-		{% endblock %}
+			{% endblock %}
+		</div>
+		<!-- Footer -->
+		<footer id="footer" class="text-center">
 
+		  <!-- Footer Elements -->
+		  	<div class="col-md-12">
+	            <ul class="social-network social-circle">
+	                <li><a href="https://instagram.com/fitaholic_pavi" class="icoRss bg-dark" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+	                <li><a href="https://www.facebook.com/pavitra.agarwal.14" class="icoFacebook bg-dark" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+	                <li><a href="https://linkedin.com/in/agarwalpavitra" class="icoLinkedin bg-dark" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+	            </ul>				
+			</div>
+		  <!-- Footer Elements -->
+
+		  <!-- Copyright -->
+		  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+		    <strong>fitaholic_pavi</strong>
+		  </div>
+		  <!-- Copyright -->
+
+		</footer>
 	</div>
-
+	<!-- Footer -->
 	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- Popper JS -->
